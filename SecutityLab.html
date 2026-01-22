@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --discord-bg: #36393f;
+            --discord-secondary: #2f3136;
+            --discord-tertiary: #202225;
+            --discord-text: #dcddde;
+            --discord-accent: #5865f2;
+            --discord-accent-hover: #4752c4;
+            --discord-green: #57f287;
+            --discord-border: #40444b;
+        }
+
+        body {
+            background-color: var(--discord-bg);
+            color: var(--discord-text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: var(--discord-tertiary);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--discord-border);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo h1 {
+         color: white;
+        font-size: 28px;
+        font-weight: 700;
+        color: #5865f2; /* Только синий цвет Discord */
+        }
+
+        /* Навигационное меню */
+        nav {
+            background-color: var(--discord-secondary);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid var(--discord-border);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+
+        .nav-links li {
+            flex: 1;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background-color: var(--discord-tertiary);
+            color: var(--discord-text);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--discord-bg);
+            border-color: var(--discord-border);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background-color: var(--discord-accent);
+            color: white;
+        }
+
+        .nav-links i {
+            font-size: 18px;
+        }
+
+        /* Основной контент */
+        main {
+            background-color: var(--discord-secondary);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+            border: 1px solid var(--discord-border);
+            min-height: 500px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page h2 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--discord-accent);
+        }
+
+        .page-content {
+            padding: 20px 0;
+        }
+
+        .card {
+            background-color: var(--discord-tertiary);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--discord-accent);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: var(--discord-green);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        /* Подвал */
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px;
+            color: #8a8e94;
+            font-size: 14px;
+            border-top: 1px solid var(--discord-border);
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .logo h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shield-alt fa-2x" style="color: #5865f2;"></i>
+                    <h1>SecurityLab</h1>
+                </div>
+                <div class="tagline">
+                    <p>Исследование фишинговых атак и методов защиты</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul class="nav-links">
+                <li>
+                    <a href="#" class="nav-btn active" data-page="home">
+                        <i class="fas fa-home"></i>
+                        <span>Главная</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-btn" data-page="about">
+                        <i class="fas fa-info-circle"></i>
+                        <span>О проекте</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-btn" data-page="research">
+                        <i class="fas fa-search"></i>
+                        <span>Исследование</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-btn" data-page="methods">
+                        <i class="fas fa-code"></i>
+                        <span>Методы</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-btn" data-page="results">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Результаты</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-btn" data-page="contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>Контакты</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- Главная страница -->
+            <section id="home" class="page active">
+                <h2><i class="fas fa-home"></i> Добро пожаловать</h2>
+                <div class="page-content">
+                    <div class="card">
+                        <h3><i class="fas fa-bullseye"></i> Цель проекта</h3>
+                        <p>Исследование современных фишинговых атак, анализ методов социальной инженерии и разработка эффективных способов защиты пользователей.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-tasks"></i> Задачи</h3>
+                        <p>• Анализ существующих фишинговых техник<br>
+                           • Изучение психологических аспектов социальной инженерии<br>
+                           • Разработка рекомендаций по безопасности<br>
+                           • Создание системы распознавания фишинговых сайтов</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- О проекте -->
+            <section id="about" class="page">
+                <h2><i class="fas fa-info-circle"></i> О проекте</h2>
+                <div class="page-content">
+                    <div class="card">
+                        <h3><i class="fas fa-project-diagram"></i> Описание</h3>
+                        <p>Данный индивидуальный проект посвящен глубокому анализу фишинговых атак. Мы исследуем как технические аспекты, так и человеческий фактор в кибербезопасности.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-calendar-alt"></i> Сроки</h3>
+                        <p>Проект рассчитан на 3 месяца и включает в себя несколько этапов исследования и разработки.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Исследование -->
+            <section id="research" class="page">
+                <h2><i class="fas fa-search"></i> Исследование</h2>
+                <div class="page-content">
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Статистика</h3>
+                        <p>Современные тенденции в области фишинговых атак показывают рост на 65% за последний год.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Методы -->
+            <section id="methods" class="page">
+                <h2><i class="fas fa-code"></i> Методы исследования</h2>
+                <div class="page-content">
+                    <div class="card">
+                        <h3><i class="fas fa-flask"></i> Эксперименты</h3>
+                        <p>Использование контролируемых фишинговых атак для анализа поведения пользователей.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Результаты -->
+            <section id="results" class="page">
+                <h2><i class="fas fa-chart-bar"></i> Результаты</h2>
+                <div class="page-content">
+                    <div class="card">
+                        <h3><i class="fas fa-check-circle"></i> Выводы</h3>
+                        <p>Предварительные результаты показывают эффективность многофакторной аутентификации.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Контакты -->
+            <section id="contact" class="page">
+                <h2><i class="fas fa-envelope"></i> Контакты</h2>
+                <div class="page-content">
+                    <div class="card">
+                        <h3><i class="fas fa-user"></i> Автор</h3>
+                        <p>Индивидуальный проект студента [Ваше Имя]<br>
+                        Для связи: student@university.edu</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 SecurityLab. Индивидуальный проект по исследованию фишинговых атак. Все права защищены.</p>
+            <p style="margin-top: 10px; font-size: 12px;">Цветовая схема: Discord Dark Theme</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const pages = document.querySelectorAll('.page');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const pageId = this.getAttribute('data-page');
+                    
+                    // Убираем активный класс у всех кнопок и страниц
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // Добавляем активный класс текущей кнопке и странице
+                    this.classList.add('active');
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+            
+            // Для демонстрации: добавляем немного интерактивности
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
